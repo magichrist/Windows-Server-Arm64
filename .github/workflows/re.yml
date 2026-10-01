@@ -1,0 +1,246 @@
+```yaml
+name: Build Windows Server ARM64 ISO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: UUP → Datacenter ARM64 ISO → 5 gzip parts
+    runs-on: ubuntu-24.04-arm
+
+    env:
+      DEBIAN_FRONTEND: noninteractive
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show runner
+        shell: bash
+        run: |
+          set -euxo pipefail
+          uname -a
+          uname -m
+          df -h
+          free -h
+
+      - name: Free runner disk space
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/share/powershell
+          sudo rm -rf /usr/local/share/chromium
+          sudo rm -rf /usr/local/lib/node_modules
+          sudo apt-get clean
+
+          echo "Remaining disk:"
+          df -h
+
+      - name: Install UUP dependencies
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          sudo apt-get update
+
+          sudo apt-get install -y \
+            aria2 \
+            cabextract \
+            wimtools \
+            genisoimage \
+            chntpw \
+            p7zip-full \
+            rsync \
+            curl \
+            xorriso
+
+          echo "Installed:"
+          aria2c --version | head -n 1
+          wimlib-imagex --version
+          chntpw -h 2>&1 | head -n 3
+          mkisofs --version | head -n 1 || true
+          xorriso -version | head -n 1
+
+      - name: Prepare UUP script
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          # UUP Dump's Unix script works on Linux as well.
+          if [ -f uup_download_linux.sh ]; then
+            chmod +x uup_download_linux.sh
+          elif [ -f uup_download_macos.sh ]; then
+            chmod +x uup_download_macos.sh
+            cp uup_download_macos.sh uup_download_linux.sh
+            chmod +x uup_download_linux.sh
+          else
+            echo "No UUP Dump Unix download script found."
+            exit 1
+          fi
+
+          ls -lh uup_download_linux.sh
+
+      - name: Download UUP and build ISO
+        shell: bash
+        timeout-minutes: 180
+        run: |
+          set -euxo pipefail
+
+          ./uup_download_linux.sh
+
+      - name: Find generated ISO
+        id: iso
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          ISO="$(find . -type f \
+            \( -iname '*.iso' -o -iname '*.ISO' \) \
+            -not -path './.git/*' \
+            -print -quit)"
+
+          if [ -z "$ISO" ]; then
+            echo "No ISO was generated."
+            echo
+            echo "Workspace:"
+            find . -maxdepth 4 -type f -printf '%p %s bytes\n' | sort
+            echo
+            df -h
+            exit 1
+          fi
+
+          echo "ISO=$ISO"
+          echo "iso=$ISO" >> "$GITHUB_OUTPUT"
+
+      - name: Verify ISO
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          ISO="${{ steps.iso.outputs.iso }}"
+
+          echo "ISO:"
+          ls -lh "$ISO"
+
+          echo
+          echo "SHA256:"
+          sha256sum "$ISO" | tee iso.sha256
+
+      - name: Split ISO into exactly 5 parts
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          ISO="${{ steps.iso.outputs.iso }}"
+          mkdir -p release
+
+          # GNU split creates exactly 5 chunks with -n 5.
+          split \
+            -n 5 \
+            -d \
+            --numeric-suffixes=0 \
+            "$ISO" \
+            release/server-arm64-datacenter.iso.part
+
+          count="$(find release -maxdepth 1 -type f \
+            -name 'server-arm64-datacenter.iso.part*' | wc -l | tr -d ' ')"
+
+          if [ "$count" -ne 5 ]; then
+            echo "Expected exactly 5 ISO parts, found $count"
+            exit 1
+          fi
+
+          echo "Created parts:"
+          ls -lh release/
+
+      - name: Gzip each part
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          for part in release/server-arm64-datacenter.iso.part*; do
+            gzip -9 "$part"
+          done
+
+          count="$(find release -maxdepth 1 -type f \
+            -name 'server-arm64-datacenter.iso.part*.gz' | wc -l | tr -d ' ')"
+
+          if [ "$count" -ne 5 ]; then
+            echo "Expected exactly 5 gzip files, found $count"
+            exit 1
+          fi
+
+          echo "Compressed parts:"
+          ls -lh release/
+
+      - name: Create reconstruction script
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          cat > release/reassemble.sh <<'EOF'
+          #!/usr/bin/env bash
+          set -euo pipefail
+
+          OUT="Windows-Server-Datacenter-ARM64.iso"
+
+          for i in 0 1 2 3 4; do
+            file=$(printf "server-arm64-datacenter.iso.part%02d.gz" "$i")
+            test -f "$file"
+          done
+
+          rm -f "$OUT"
+
+          for i in 0 1 2 3 4; do
+            file=$(printf "server-arm64-datacenter.iso.part%02d.gz" "$i")
+            gzip -dc "$file" >> "$OUT"
+          done
+
+          echo "Created: $OUT"
+          sha256sum "$OUT"
+          EOF
+
+          chmod +x release/reassemble.sh
+
+      - name: Create part checksums
+        shell: bash
+        run: |
+          set -euxo pipefail
+
+          (
+            cd release
+            sha256sum \
+              server-arm64-datacenter.iso.part*.gz \
+              reassemble.sh
+          ) | tee parts.sha256
+
+          mv release/parts.sha256 ./parts.sha256
+
+      - name: Upload 5 gzip parts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-server-datacenter-arm64-iso-parts
+          path: |
+            release/server-arm64-datacenter.iso.part*.gz
+            release/reassemble.sh
+            parts.sha256
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 7
+
+      - name: Upload ISO checksum
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-server-datacenter-arm64-iso-checksum
+          path: iso.sha256
+          if-no-files-found: error
+          retention-days: 7
+```

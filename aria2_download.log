@@ -1,0 +1,176 @@
+2026-10-02 00:42:38.696551 [INFO] [Context.cc:179] <<--- --- --- ---
+2026-10-02 00:42:38.696758 [INFO] [Context.cc:180]   --- --- --- ---
+2026-10-02 00:42:38.696764 [INFO] [Context.cc:181]   --- --- --- --->>
+2026-10-02 00:42:38.696833 [INFO] [Context.cc:182] aria2 1.37.0
+2026-10-02 00:42:38.696876 [INFO] [Context.cc:183] Apple LLVM 17.0.0 (clang-1700.6.4.2)
+  built by  aarch64-apple-darwin24.6.0
+  on        Nov 15 2023 10:43:58
+2026-10-02 00:42:38.696891 [INFO] [Context.cc:184] Darwin 24.6.0 Darwin Kernel Version 24.6.0: Tue Apr 21 20:18:14 PDT 2026; root:xnu-11417.140.69.710.16~1/RELEASE_ARM64_T8103 arm64
+2026-10-02 00:42:38.696897 [INFO] [Context.cc:185] zlib/1.2.12 libxml2/2.9.13 sqlite3/3.53.0 OpenSSL/3.6.0b c-ares/1.34.6 libssh2/1.11.1
+2026-10-02 00:42:38.696903 [INFO] [Context.cc:186] Logging started.
+2026-10-02 00:42:38.696908 [INFO] [SocketCore.cc:1660] Checking configured addresses
+2026-10-02 00:42:38.696943 [INFO] [SocketCore.cc:1711] Not considered: 127.0.0.1
+2026-10-02 00:42:38.696949 [INFO] [SocketCore.cc:1711] Not considered: ::1
+2026-10-02 00:42:38.696970 [INFO] [SocketCore.cc:1711] Not considered: fe80::1%lo0
+2026-10-02 00:42:38.696990 [INFO] [SocketCore.cc:1711] Not considered: fe80::1ccd:6c88:f07e:a51e%en0
+2026-10-02 00:42:38.696994 [INFO] [SocketCore.cc:1708] Found configured address: 192.168.1.102
+2026-10-02 00:42:38.697014 [INFO] [SocketCore.cc:1711] Not considered: fe80::6492:abff:fe34:23a0%awdl0
+2026-10-02 00:42:38.697033 [INFO] [SocketCore.cc:1711] Not considered: fe80::6492:abff:fe34:23a0%llw0
+2026-10-02 00:42:38.697052 [INFO] [SocketCore.cc:1711] Not considered: fe80::d1ea:5f79:4c36:f0b3%utun0
+2026-10-02 00:42:38.697074 [INFO] [SocketCore.cc:1711] Not considered: fe80::94e5:9b73:901c:ca0a%utun1
+2026-10-02 00:42:38.697096 [INFO] [SocketCore.cc:1711] Not considered: fe80::5c9b:838e:8897:fe22%utun2
+2026-10-02 00:42:38.697116 [INFO] [SocketCore.cc:1711] Not considered: fe80::ce81:b1c:bd2c:69e%utun3
+2026-10-02 00:42:38.697122 [INFO] [SocketCore.cc:1716] IPv4 configured=1, IPv6 configured=0
+2026-10-02 00:42:38.697869 [NOTICE] [Context.cc:311] Downloading 2 item(s)
+2026-10-02 00:42:38.715376 [INFO] [LibsslTLSContext.cc:284] System trusted CA certificates were successfully added.
+2026-10-02 00:42:38.717718 [INFO] [AsyncNameResolverMan.cc:83] CUID#7 - Resolving hostname git.uupdump.net
+2026-10-02 00:42:38.717925 [INFO] [AsyncNameResolverMan.cc:83] CUID#8 - Resolving hostname git.uupdump.net
+2026-10-02 00:42:38.742728 [INFO] [AbstractCommand.cc:817] CUID#7 - Name resolution complete: git.uupdump.net -> 188.114.99.0, 188.114.98.0
+2026-10-02 00:42:38.742756 [INFO] [HttpInitiateConnectionCommand.cc:123] CUID#7 - Connecting to 188.114.99.0:443
+2026-10-02 00:42:38.744140 [INFO] [AbstractCommand.cc:772] CUID#8 - DNS cache hit: git.uupdump.net -> 188.114.99.0, 188.114.98.0
+2026-10-02 00:42:38.744155 [INFO] [HttpInitiateConnectionCommand.cc:123] CUID#8 - Connecting to 188.114.99.0:443
+2026-10-02 00:42:38.958665 [INFO] [HttpConnection.cc:129] CUID#7 - Requesting:
+GET /uup-dump/converter/raw/commit/7b507c6c99afcf4cff59adcdf51cdb75159bd548/convert.sh HTTP/1.1
+User-Agent: aria2/1.37.0
+Accept: */*,application/metalink4+xml,application/metalink+xml
+Host: git.uupdump.net
+Want-Digest: SHA-512;q=1, SHA-256;q=1, SHA;q=0.1
+
+
+2026-10-02 00:42:38.964367 [INFO] [HttpConnection.cc:129] CUID#8 - Requesting:
+GET /uup-dump/converter/raw/commit/7b507c6c99afcf4cff59adcdf51cdb75159bd548/convert_ve_plugin HTTP/1.1
+User-Agent: aria2/1.37.0
+Accept: */*,application/metalink4+xml,application/metalink+xml
+Host: git.uupdump.net
+Want-Digest: SHA-512;q=1, SHA-256;q=1, SHA;q=0.1
+
+
+2026-10-02 00:42:39.114583 [INFO] [HttpConnection.cc:164] CUID#8 - Response received:
+HTTP/1.1 200 OK
+Date: Thu, 01 Oct 2026 21:12:39 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 81010
+Connection: keep-alive
+access-control-expose-headers: Content-Disposition
+alt-svc: h3=":443"; ma=86400
+Cache-Control: public, max-age=21600
+content-disposition: inline; filename=convert_ve_plugin
+content-security-policy: default-src 'none'; style-src 'unsafe-inline'; sandbox
+etag: "9063887abcdac723a230317720a6bdfb72bd41d7"
+last-modified: Sun, 10 Oct 2021 00:53:49 GMT
+Server: cloudflare
+Set-Cookie: <snip>
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+cf-cache-status: DYNAMIC
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=8F%2BvgGcPB5Lyol4e5Tm953Zd7XEWKCB2aXIBkyoUh5NMKYnoT85pZhVNafAvIQXUI4Fbrl60p5PZbQd092HDZSEQ7a%2BsscoiWB2N2A2MCDa7vYeugCTn%2B9Yh22%2FgzMUleMg%3D"}]}
+CF-RAY: a43e777d6f0ad0ce-SOF
+
+
+2026-10-02 00:42:39.115298 [INFO] [DefaultBtProgressInfoFile.cc:421] The segment file files/convert_ve_plugin.aria2 does not exist.
+2026-10-02 00:42:39.115467 [INFO] [DefaultBtProgressInfoFile.cc:421] The segment file files/convert_ve_plugin.aria2 does not exist.
+2026-10-02 00:42:39.115518 [INFO] [DefaultBtProgressInfoFile.cc:421] The segment file files/convert_ve_plugin.aria2 does not exist.
+2026-10-02 00:42:39.115554 [INFO] [DefaultBtProgressInfoFile.cc:421] The segment file files/convert_ve_plugin.aria2 does not exist.
+2026-10-02 00:42:39.116528 [INFO] [DefaultBtProgressInfoFile.cc:207] Saving the segment file files/convert_ve_plugin.aria2
+2026-10-02 00:42:39.117521 [INFO] [DefaultBtProgressInfoFile.cc:219] The segment file was saved successfully.
+2026-10-02 00:42:39.184080 [INFO] [HttpConnection.cc:164] CUID#7 - Response received:
+HTTP/1.1 200 OK
+Date: Thu, 01 Oct 2026 21:12:39 GMT
+Content-Type: text/plain; charset=utf-8
+Content-Length: 19344
+Connection: keep-alive
+access-control-expose-headers: Content-Disposition
+alt-svc: h3=":443"; ma=86400
+Cache-Control: public, max-age=21600
+content-disposition: inline; filename=convert.sh
+content-security-policy: default-src 'none'; style-src 'unsafe-inline'; sandbox
+etag: "cb7539a6c3eb9b8865db8a97c44420edeb435537"
+last-modified: Mon, 13 Feb 2023 15:24:10 GMT
+Server: cloudflare
+Set-Cookie: <snip>
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+cf-cache-status: DYNAMIC
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=q4EopjpNFGIoWbkR7reJ%2FQTWyhISun9sCT2FI5dpRD%2FYha%2BQs5PdpD8L4q5eZ5rlWt4P0yek39pVsEC4wj3ukR0PlZuUfcylu5jkbRfLDYRv%2FSO8E4%2BE8VqKunIE3dC4mfs%3D"}]}
+CF-RAY: a43e777d5cb8d0d4-SOF
+
+
+2026-10-02 00:42:39.184464 [INFO] [DefaultBtProgressInfoFile.cc:421] The segment file files/convert.sh.aria2 does not exist.
+2026-10-02 00:42:39.184554 [INFO] [DefaultBtProgressInfoFile.cc:421] The segment file files/convert.sh.aria2 does not exist.
+2026-10-02 00:42:39.184598 [INFO] [DefaultBtProgressInfoFile.cc:421] The segment file files/convert.sh.aria2 does not exist.
+2026-10-02 00:42:39.184635 [INFO] [DefaultBtProgressInfoFile.cc:421] The segment file files/convert.sh.aria2 does not exist.
+2026-10-02 00:42:39.185347 [INFO] [DefaultBtProgressInfoFile.cc:207] Saving the segment file files/convert.sh.aria2
+2026-10-02 00:42:39.186435 [INFO] [DefaultBtProgressInfoFile.cc:219] The segment file was saved successfully.
+2026-10-02 00:42:39.224815 [INFO] [DownloadCommand.cc:242] CUID#7 - The download for one segment completed successfully.
+2026-10-02 00:42:39.225470 [INFO] [DefaultPieceStorage.cc:483] The download was complete.
+2026-10-02 00:42:39.225539 [INFO] [DownloadEngine.cc:315] Pool socket for 188.114.99.0(443)
+2026-10-02 00:42:39.225718 [INFO] [CheckIntegrityDispatcherCommand.cc:59] CUID#3 - Dispatching CheckIntegrityCommand CUID#9.
+2026-10-02 00:42:39.225997 [NOTICE] [CheckIntegrityCommand.cc:78] Verification finished successfully. file=files/convert.sh
+2026-10-02 00:42:39.226329 [NOTICE] [RequestGroup.cc:1217] Download complete: files/convert.sh
+2026-10-02 00:42:39.226437 [INFO] [DefaultBtProgressInfoFile.cc:417] The segment file files/convert.sh.aria2 exists.
+2026-10-02 00:42:39.258641 [INFO] [DownloadCommand.cc:242] CUID#8 - The download for one segment completed successfully.
+2026-10-02 00:42:39.259792 [INFO] [DefaultPieceStorage.cc:483] The download was complete.
+2026-10-02 00:42:39.259860 [INFO] [DownloadEngine.cc:315] Pool socket for 188.114.99.0(443)
+2026-10-02 00:42:39.260004 [INFO] [CheckIntegrityDispatcherCommand.cc:59] CUID#3 - Dispatching CheckIntegrityCommand CUID#10.
+2026-10-02 00:42:39.260476 [NOTICE] [CheckIntegrityCommand.cc:78] Verification finished successfully. file=files/convert_ve_plugin
+2026-10-02 00:42:39.260833 [NOTICE] [RequestGroup.cc:1217] Download complete: files/convert_ve_plugin
+2026-10-02 00:42:39.260919 [INFO] [DefaultBtProgressInfoFile.cc:417] The segment file files/convert_ve_plugin.aria2 exists.
+2026-10-02 00:42:39.295850 [INFO] [Context.cc:179] <<--- --- --- ---
+2026-10-02 00:42:39.296207 [INFO] [Context.cc:180]   --- --- --- ---
+2026-10-02 00:42:39.296218 [INFO] [Context.cc:181]   --- --- --- --->>
+2026-10-02 00:42:39.296234 [INFO] [Context.cc:182] aria2 1.37.0
+2026-10-02 00:42:39.296253 [INFO] [Context.cc:183] Apple LLVM 17.0.0 (clang-1700.6.4.2)
+  built by  aarch64-apple-darwin24.6.0
+  on        Nov 15 2023 10:43:58
+2026-10-02 00:42:39.296279 [INFO] [Context.cc:184] Darwin 24.6.0 Darwin Kernel Version 24.6.0: Tue Apr 21 20:18:14 PDT 2026; root:xnu-11417.140.69.710.16~1/RELEASE_ARM64_T8103 arm64
+2026-10-02 00:42:39.296289 [INFO] [Context.cc:185] zlib/1.2.12 libxml2/2.9.13 sqlite3/3.53.0 OpenSSL/3.6.0b c-ares/1.34.6 libssh2/1.11.1
+2026-10-02 00:42:39.296302 [INFO] [Context.cc:186] Logging started.
+2026-10-02 00:42:39.296311 [INFO] [SocketCore.cc:1660] Checking configured addresses
+2026-10-02 00:42:39.296382 [INFO] [SocketCore.cc:1711] Not considered: 127.0.0.1
+2026-10-02 00:42:39.296392 [INFO] [SocketCore.cc:1711] Not considered: ::1
+2026-10-02 00:42:39.296427 [INFO] [SocketCore.cc:1711] Not considered: fe80::1%lo0
+2026-10-02 00:42:39.296462 [INFO] [SocketCore.cc:1711] Not considered: fe80::1ccd:6c88:f07e:a51e%en0
+2026-10-02 00:42:39.296471 [INFO] [SocketCore.cc:1708] Found configured address: 192.168.1.102
+2026-10-02 00:42:39.296504 [INFO] [SocketCore.cc:1711] Not considered: fe80::6492:abff:fe34:23a0%awdl0
+2026-10-02 00:42:39.296537 [INFO] [SocketCore.cc:1711] Not considered: fe80::6492:abff:fe34:23a0%llw0
+2026-10-02 00:42:39.296571 [INFO] [SocketCore.cc:1711] Not considered: fe80::d1ea:5f79:4c36:f0b3%utun0
+2026-10-02 00:42:39.296603 [INFO] [SocketCore.cc:1711] Not considered: fe80::94e5:9b73:901c:ca0a%utun1
+2026-10-02 00:42:39.296636 [INFO] [SocketCore.cc:1711] Not considered: fe80::5c9b:838e:8897:fe22%utun2
+2026-10-02 00:42:39.296669 [INFO] [SocketCore.cc:1711] Not considered: fe80::ce81:b1c:bd2c:69e%utun3
+2026-10-02 00:42:39.296676 [INFO] [SocketCore.cc:1716] IPv4 configured=1, IPv6 configured=0
+2026-10-02 00:42:39.296719 [NOTICE] [Context.cc:311] Downloading 1 item(s)
+2026-10-02 00:42:39.309491 [INFO] [LibsslTLSContext.cc:284] System trusted CA certificates were successfully added.
+2026-10-02 00:42:39.310287 [INFO] [AsyncNameResolverMan.cc:83] CUID#7 - Resolving hostname uupdump.net
+2026-10-02 00:42:39.334849 [INFO] [AbstractCommand.cc:817] CUID#7 - Name resolution complete: uupdump.net -> 104.21.49.32, 172.67.140.132
+2026-10-02 00:42:39.334875 [INFO] [HttpInitiateConnectionCommand.cc:123] CUID#7 - Connecting to 104.21.49.32:443
+2026-10-02 00:42:39.553918 [INFO] [HttpConnection.cc:129] CUID#7 - Requesting:
+GET /get.php?id=24503bf8-5d50-4542-a124-a1a42544a4cb&pack=en-us&edition=serverdatacenter;serverdatacentercore;serverturbine;serverturbinecore;serverstandard;serverstandardcore&aria2=2 HTTP/1.1
+User-Agent: aria2/1.37.0
+Accept: */*,application/metalink4+xml,application/metalink+xml
+Host: uupdump.net
+Want-Digest: SHA-512;q=1, SHA-256;q=1, SHA;q=0.1
+
+
+2026-10-02 00:42:40.410139 [INFO] [HttpConnection.cc:164] CUID#7 - Response received:
+HTTP/1.1 200 OK
+Date: Thu, 01 Oct 2026 21:12:40 GMT
+Content-Type: text/plain;charset=UTF-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Server: cloudflare
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+cf-cache-status: DYNAMIC
+Nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+X-Content-Type-Options: nosniff
+Report-To: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=fEkEj3%2B%2BTk0XxaiKAhGDfXi5eiIBBuAXrHBPdWcvXRqrmhxTYgn%2FeJnAnlYBsAhMf6rk0fO5t7GtLIGmHZGYN4gvLbmSYT8rr8%2Bzx5CJEF%2BW1PYCC90u%2FVf%2Brqq9yw%3D%3D"}]}
+CF-RAY: a43e7781196ad2a4-FRA
+alt-svc: h3=":443"; ma=86400
+
+
+2026-10-02 00:42:40.411475 [INFO] [DownloadCommand.cc:242] CUID#7 - The download for one segment completed successfully.
+2026-10-02 00:42:40.411562 [INFO] [DownloadEngine.cc:315] Pool socket for 104.21.49.32(443)
+2026-10-02 00:42:40.412270 [NOTICE] [RequestGroup.cc:1217] Download complete: /Users/alitabeee/Downloads/26236/aria2_script.30449.txt
